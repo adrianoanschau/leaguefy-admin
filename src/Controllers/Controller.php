@@ -1,6 +1,6 @@
 <?php
 
-namespace Leaguefy\LeaguefyManager\Controllers;
+namespace Leaguefy\LeaguefyAdmin\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;

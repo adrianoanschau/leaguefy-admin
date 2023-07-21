@@ -1,6 +1,6 @@
 <?php
 
-namespace Leaguefy\LeaguefyManager\Traits;
+namespace Leaguefy\LeaguefyAdmin\Traits;
 
 use BackedEnum;
 
