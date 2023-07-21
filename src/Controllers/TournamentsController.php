@@ -16,8 +16,7 @@ class TournamentsController extends Controller
 
         return view('leaguefy-admin::tournaments.index', [
             'columns' => [
-                'name',
-                'slug',
+                ['label' => 'Name', 'column' => 'name'],
             ],
             'data' => $tournaments->toArray(),
         ]);

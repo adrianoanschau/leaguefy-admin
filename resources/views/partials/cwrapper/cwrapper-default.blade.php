@@ -8,7 +8,6 @@
 
 {{-- Default Content Wrapper --}}
 <main id="main" class="content-wrapper {{ config('adminlte.classes_content_wrapper', '') }}">
-    <div id="pjax-container">
         <!--start-pjax-container-->
 
         {{-- Content Header --}}
@@ -30,6 +29,4 @@
         </div>
 
         <!--end-pjax-container-->
-    </div>
-
 </main>

@@ -16,8 +16,7 @@ class TeamsController extends Controller
 
         return view('leaguefy-admin::teams.index', [
             'columns' => [
-                'name',
-                'slug',
+                ['label' => 'Name', 'column' => 'name'],
             ],
             'data' => $teams->toArray(),
         ]);

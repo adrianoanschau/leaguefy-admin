@@ -11,8 +11,9 @@ class Grid extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public mixed $columns,
         public mixed $data,
+        public mixed $columns,
+        public string|null $title = null,
     )
     {
         //
@@ -24,6 +25,7 @@ class Grid extends Component
     public function render(): View
     {
         return view('leaguefy-admin::components.grid', [
+            'title' => $this->title,
             'columns' => $this->columns,
             'data' => $this->data,
         ]);

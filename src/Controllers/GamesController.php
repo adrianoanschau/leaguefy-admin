@@ -16,8 +16,7 @@ class GamesController extends Controller
 
         return view('leaguefy-admin::games.index', [
             'columns' => [
-                'name',
-                'slug',
+                ['label' => 'Name', 'column' => 'name'],
             ],
             'data' => $games->toArray(),
         ]);
