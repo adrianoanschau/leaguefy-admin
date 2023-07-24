@@ -1,0 +1,3 @@
+leaguefy.tournaments = {
+  init: function () {},
+};

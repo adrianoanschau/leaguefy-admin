@@ -5,5 +5,5 @@
 @stop
 
 @section('content')
-    <x-leaguefy-admin::grid :$columns :$data />
+    <x-leaguefy-admin::grid name="game" :$columns :$data />
 @endsection

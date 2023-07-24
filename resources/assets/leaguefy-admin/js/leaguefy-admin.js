@@ -9,6 +9,8 @@ leaguefy.pages = {}; // shared logic for pages
 leaguefy.form = {}; // form in page
 leaguefy.grid = {}; // grid / lister
 leaguefy.action = {}; // actions
+leaguefy.swal = {}; // swal
+leaguefy.tournaments = {}; // tournaments
 
 document.addEventListener('DOMContentLoaded', function () {
   leaguefy.init();
@@ -18,6 +20,14 @@ leaguefy.init = function () {
   leaguefy.menu.init();
   leaguefy.ajax.init();
   leaguefy.pages.init();
+  leaguefy.form.init();
+  leaguefy.swal.init();
+  leaguefy.tournaments.init();
+};
+
+leaguefy.refresh = function () {
+  leaguefy.form.refresh();
+  leaguefy.swal.refresh();
 };
 
 /*-------------------------------------------------*/
@@ -350,6 +360,7 @@ leaguefy.ajax = {
       data = JSON.stringify(data);
     }
     main.innerHTML = data;
+    leaguefy.refresh();
 
     main.querySelectorAll('script').forEach((script) => {
       var src = script.getAttribute('src');

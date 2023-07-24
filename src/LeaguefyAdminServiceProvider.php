@@ -15,7 +15,7 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
     private $prefix = 'leaguefy-admin';
 
     private $middlewares = [
-        'leaguefy-admin.pjax' => Middleware\Pjax::class,
+        'leaguefy-admin.pjax'       => Middleware\Pjax::class,
     ];
 
     private $commands = [
@@ -56,7 +56,11 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             Route::group([
                 'prefix'     => config('leaguefy-admin.route.prefix'),
-                'middleware' => array_merge(['leaguefy-admin', 'leaguefy-admin.pjax'], config('leaguefy-admin.route.middleware', [])),
+                'middleware' => array_merge([
+                    'leaguefy-admin',
+                    'leaguefy-admin.pjax',
+                ], config('leaguefy-admin.route.middleware', [])),
+                'as' => 'leaguefy.admin.',
             ], $this->path(LeaguefyAdmin::$routes));
         });
 

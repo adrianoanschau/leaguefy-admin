@@ -6,7 +6,7 @@ return [
 
     'route' => [
         'prefix' => 'leaguefy',
-        'middleware' => [],
+        'middleware' => ['web'],
     ],
 
     'menu' => [

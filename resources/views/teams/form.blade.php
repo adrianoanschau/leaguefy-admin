@@ -1,9 +1,9 @@
 @extends('leaguefy-admin::page')
 
 @section('content_header')
-  <h1>Teams</h1>
+  <h1>New Team</h1>
 @stop
 
 @section('content')
-    <x-leaguefy-admin::grid name="team" :$columns :$data />
+    <x-leaguefy-admin::form name="team" :$fields :id="@$id" :data="@$data" />
 @endsection
