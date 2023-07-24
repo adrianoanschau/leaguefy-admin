@@ -13,6 +13,12 @@
       "name": "Adriano Anschau"
     }
   ],
+  "require": {
+    "php": ">=7.2.5",
+    "laravel/framework": ">=7.0",
+    "jeroennoten/laravel-adminlte": ">=3.9.1",
+    "leaguefy/leaguefy-manager": "dev-main"
+  },
   "extra": {
     "laravel": {
       "providers": [
@@ -23,11 +29,6 @@
       }
     }
   },
-  "minimum-stability": "dev",
-  "require": {
-    "php": ">=7.2.5",
-    "laravel/framework": ">=7.0",
-    "jeroennoten/laravel-adminlte": ">=3.9.1",
-    "leaguefy/leaguefy-manager": "dev-main"
-  }
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
