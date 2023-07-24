@@ -16,6 +16,7 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
 
     private $middlewares = [
         'leaguefy-admin.pjax'       => Middleware\Pjax::class,
+        'leaguefy-admin.redirects'  => Middleware\Redirects::class,
     ];
 
     private $commands = [
@@ -59,6 +60,7 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
                 'middleware' => array_merge([
                     'leaguefy-admin',
                     'leaguefy-admin.pjax',
+                    'leaguefy-admin.redirects',
                 ], config('leaguefy-admin.route.middleware', [])),
                 'as' => 'leaguefy.admin.',
             ], $this->path(LeaguefyAdmin::$routes));

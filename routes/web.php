@@ -21,7 +21,6 @@ Route::get('/', function () {
 Route::resource('games', Controllers\GamesController::class);
 Route::resource('teams', Controllers\TeamsController::class);
 Route::resource('tournaments', Controllers\TournamentsController::class);
-Route::resource('tournaments/{tournament}/stages', Controllers\StagesController::class)->only(['index', 'store', 'destroy']);
-Route::delete('tournaments/{tournament}/stages',Controllers\StagesController::class.'@index')->name('stages.index');
+Route::resource('tournaments/{tournament}/stages', Controllers\StagesController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::post('tournaments/{tournament}/stages/connect', Controllers\StagesController::class.'@connect')
     ->name('stages.connect');

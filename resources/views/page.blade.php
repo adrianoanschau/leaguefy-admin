@@ -84,10 +84,10 @@
                     <div id="app">
                         @yield('content')
                     </div>
+
+                    @include('leaguefy-admin::partials.common.toastr')
                 </div>
             </div>
-
-            @include('leaguefy-admin::partials.common.toastr')
 
             <!--end-pjax-container-->
         </main>

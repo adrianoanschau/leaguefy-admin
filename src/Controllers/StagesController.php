@@ -38,6 +38,23 @@ class StagesController extends Controller
         ]));
     }
 
+    public function update(int $tournament, int $stage, Request $request)
+    {
+        try {
+            $tournament = $this->tournamentsService->find($tournament);
+            $request->merge(['tournament' => $tournament->slug]);
+
+            $this->stagesService->update($stage, $request);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
+        return redirect()->back()->with('toastr', collect([
+            'type' => ['success'],
+            'message' => ['Etapa atualizada com sucesso!']
+        ]));
+    }
+
     public function connect(int $tournament, Request $request)
     {
         try {
