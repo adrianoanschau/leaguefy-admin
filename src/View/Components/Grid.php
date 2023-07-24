@@ -38,6 +38,7 @@ class Grid extends Component
                 'subtitle' => $column['subtitle'] ?? null,
                 'link_route' => $column['link_route'] ?? null,
                 'link_icon' => $column['link_icon'] ?? null,
+                'badge' => $column['badge'] ?? null,
             ];
         })->toArray();
 

@@ -56,6 +56,10 @@
                                                 </div>
                                             @endif
                                         </div>
+                                    @elseif(!is_null($column['badge']))
+                                        <span class="badge badge-{{$column['badge']}}">
+                                            {!! $row[$column['column']] !!}
+                                        </span>
                                     @else
                                         {!! $row[$column['column']] !!}
                                     @endif

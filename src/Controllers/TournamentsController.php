@@ -26,6 +26,10 @@ class TournamentsController extends Controller
                 ],
                 'slug',
                 [
+                    'column' => 'status',
+                    'badge' => 'primary',
+                ],
+                [
                     'label' => 'Stages',
                     'classes' => 'text-center',
                     'link_route' => 'stages',
