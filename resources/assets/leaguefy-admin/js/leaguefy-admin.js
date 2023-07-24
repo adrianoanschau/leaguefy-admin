@@ -25,9 +25,15 @@ leaguefy.init = function () {
   leaguefy.tournaments.init();
 };
 
+leaguefy.unmount = function () {
+  leaguefy.tournaments.unmount();
+};
+
 leaguefy.refresh = function () {
+  leaguefy.unmount();
   leaguefy.form.refresh();
   leaguefy.swal.refresh();
+  leaguefy.tournaments.refresh();
 };
 
 /*-------------------------------------------------*/
@@ -159,11 +165,16 @@ leaguefy.menu = {
     let menuItems = document.querySelectorAll(
       'aside.main-sidebar ul li.nav-item a',
     );
+
     menuItems.forEach((a) => {
       let li = a.parentNode;
-      li.classList.remove('active');
+      a.classList.remove('active');
       a.blur();
-      if (a.attributes['href'].value === url) {
+      const href = a.attributes['href'].value.replace(
+        window.location.origin,
+        '',
+      );
+      if (url.startsWith(href)) {
         let parent = li.parentNode;
 
         // if (!parent.classList.contains('show')) {
@@ -187,7 +198,7 @@ leaguefy.menu = {
 let preventPopState;
 
 leaguefy.ajax = {
-  currenTarget: false,
+  currentTarget: false,
   defaults: {
     headers: {
       'X-PJAX': true,
@@ -256,7 +267,7 @@ leaguefy.ajax = {
   },
 
   setUrl: function (url) {
-    if (url != document.location.href && !leaguefy.ajax.currenTarget) {
+    if (url != document.location.href && !leaguefy.ajax.currentTarget) {
       history.pushState({}, url, url);
     }
   },
@@ -297,7 +308,7 @@ leaguefy.ajax = {
         NProgress.done();
         if (
           typeof result_function == 'undefined' &&
-          !leaguefy.ajax.currenTarget
+          !leaguefy.ajax.currentTarget
         ) {
           leaguefy.pages.init();
         }
@@ -348,8 +359,8 @@ leaguefy.ajax = {
     }
 
     let main = false;
-    if (leaguefy.ajax.currenTarget) {
-      main = leaguefy.ajax.currenTarget;
+    if (leaguefy.ajax.currentTarget) {
+      main = leaguefy.ajax.currentTarget;
     }
     if (!main) {
       main = document.getElementById('main');
@@ -374,7 +385,7 @@ leaguefy.ajax = {
       }
     });
 
-    if (!leaguefy.ajax.currenTarget) {
+    if (!leaguefy.ajax.currentTarget) {
       leaguefy.pages.setTitle();
     }
   },
@@ -402,7 +413,7 @@ leaguefy.ajax = {
 leaguefy.pages = {
   init: function () {
     this.setTitle();
-    leaguefy.menu.setActivePage(window.location.href);
+    leaguefy.menu.setActivePage(window.location.pathname);
     // leaguefy.grid.init();
     // leaguefy.grid.inline_edit.init();
     // leaguefy.form.init();
@@ -433,6 +444,17 @@ leaguefy.pages = {
     );
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    var inputTooltipTriggerList = [].slice.call(
+      document.querySelectorAll('input[data-toggle="tooltip"]'),
+    );
+    var inputTooltipList = inputTooltipTriggerList.map(function (
+      inputTooltipTriggerEl,
+    ) {
+      return new bootstrap.Tooltip(inputTooltipTriggerEl, {
+        trigger: 'focus',
+      });
     });
   },
 };
