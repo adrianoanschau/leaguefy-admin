@@ -29,7 +29,7 @@ class TournamentsController extends Controller
                     'label' => 'Stages',
                     'classes' => 'text-center',
                     'link_route' => 'stages',
-                    'link_icon' => 'fa-cogs',
+                    'link_icon' => 'fa-sitemap',
                 ],
             ],
             'data' => $tournaments,
