@@ -46,11 +46,7 @@ class TeamsController extends Controller
 
     public function store(StoreTeamRequest $request)
     {
-        try {
-            $this->teamsService->store($request);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->teamsService->store($request);
 
         return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
             'type' => ['success'],
@@ -78,11 +74,7 @@ class TeamsController extends Controller
 
     public function update(int $id, UpdateTeamRequest $request)
     {
-        try {
-            $this->teamsService->update($id, $request);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->teamsService->update($id, $request);
 
         return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
             'type' => ['success'],
@@ -92,11 +84,7 @@ class TeamsController extends Controller
 
     public function destroy(int $id)
     {
-        try {
-            $this->teamsService->destroy($id);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->teamsService->destroy($id);
 
         return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
             'type' => ['success'],

@@ -56,11 +56,7 @@ class TournamentsController extends Controller
 
     public function store(StoreTournamentRequest $request)
     {
-        try {
-            $this->tournamentsService->store($request);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->tournamentsService->store($request);
 
         return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
             'type' => ['success'],
@@ -88,11 +84,7 @@ class TournamentsController extends Controller
 
     public function update(int $id, UpdateTournamentRequest $request)
     {
-        try {
-            $this->tournamentsService->update($id, $request);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->tournamentsService->update($id, $request);
 
         return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
             'type' => ['success'],
@@ -102,11 +94,7 @@ class TournamentsController extends Controller
 
     public function destroy(int $id)
     {
-        try {
-            $this->tournamentsService->destroy($id);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $this->tournamentsService->destroy($id);
 
         return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
             'type' => ['success'],

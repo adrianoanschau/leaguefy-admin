@@ -5,7 +5,6 @@ namespace Leaguefy\LeaguefyAdmin\Controllers;
 use Leaguefy\LeaguefyManager\Requests\StoreGameRequest;
 use Leaguefy\LeaguefyManager\Requests\UpdateGameRequest;
 use Leaguefy\LeaguefyManager\Services\GamesService;
-use Throwable;
 
 class GamesController extends Controller
 {
@@ -15,6 +14,8 @@ class GamesController extends Controller
 
     public function index()
     {
+        $data = $this->gamesService->list();
+
         return view('leaguefy-admin::games.index', [
             'columns' => [
                 [
@@ -24,7 +25,7 @@ class GamesController extends Controller
                 ],
                 'slug'
             ],
-            'data' => $this->gamesService->list(),
+            'data' => $data,
         ]);
     }
 
@@ -39,16 +40,13 @@ class GamesController extends Controller
 
     public function store(StoreGameRequest $request)
     {
-        try {
-            $this->gamesService->store($request);
-        } catch (Throwable $th) {
-            dd($th);
-        }
+        $this->gamesService->store($request);
 
-        return redirect()->back()->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Game criado com sucesso!']
-        ]));
+        return redirect()->back()
+            ->with('toastr', collect([
+                'type' => ['success'],
+                'message' => ['Game criado com sucesso!']
+            ]));
     }
 
     public function edit(int $id)
@@ -66,33 +64,24 @@ class GamesController extends Controller
 
     public function update(int $id, UpdateGameRequest $request)
     {
-        try {
-            $this->gamesService->update($id, $request);
+        $this->gamesService->update($id, $request);
 
-            return redirect()->back()->with('toastr', collect([
+        return redirect()->back()
+            ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Game atualizado com sucesso!']
             ]));
-        } catch (Throwable $th) {
-            dd($th);
-        }
     }
 
     public function destroy(int $id)
     {
-        try {
-            $this->gamesService->destroy($id);
+        $this->gamesService->destroy($id);
 
-            return redirect()->back()->with('toastr', collect([
+        return redirect()->back()
+            ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Game excluído com sucesso!']
             ]));
-        } catch (Throwable $th) {
-            return redirect()->back()->with('toastr', collect([
-                'type' => ['error'],
-                'message' => ['O Game não pode ser removido!']
-            ]));
-        }
     }
 
 }
