@@ -2,7 +2,8 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Illuminate\Http\Request;
+use Leaguefy\LeaguefyManager\Requests\StoreTeamRequest;
+use Leaguefy\LeaguefyManager\Requests\UpdateTeamRequest;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TeamsService;
 
@@ -43,7 +44,7 @@ class TeamsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTeamRequest $request)
     {
         try {
             $this->teamsService->store($request);
@@ -75,7 +76,7 @@ class TeamsController extends Controller
         ]);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, UpdateTeamRequest $request)
     {
         try {
             $this->teamsService->update($id, $request);

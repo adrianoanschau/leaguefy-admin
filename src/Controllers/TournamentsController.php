@@ -2,7 +2,8 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Illuminate\Http\Request;
+use Leaguefy\LeaguefyManager\Requests\StoreTournamentRequest;
+use Leaguefy\LeaguefyManager\Requests\UpdateTournamentRequest;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TournamentsService;
 
@@ -53,7 +54,7 @@ class TournamentsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTournamentRequest $request)
     {
         try {
             $this->tournamentsService->store($request);
@@ -85,7 +86,7 @@ class TournamentsController extends Controller
         ]);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, UpdateTournamentRequest $request)
     {
         try {
             $this->tournamentsService->update($id, $request);

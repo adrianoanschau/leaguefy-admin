@@ -1,7 +1,9 @@
 <?php
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
-use Illuminate\Http\Request;
+use Leaguefy\LeaguefyManager\Requests\ConnectStageRequest;
+use Leaguefy\LeaguefyManager\Requests\StoreStageRequest;
+use Leaguefy\LeaguefyManager\Requests\UpdateStageRequest;
 use Leaguefy\LeaguefyManager\Services\StagesService;
 use Leaguefy\LeaguefyManager\Services\TournamentsService;
 
@@ -21,7 +23,7 @@ class StagesController extends Controller
         ]);
     }
 
-    public function store(int $tournament, Request $request)
+    public function store(int $tournament, StoreStageRequest $request)
     {
         try {
             $tournament = $this->tournamentsService->find($tournament);
@@ -38,7 +40,7 @@ class StagesController extends Controller
         ]));
     }
 
-    public function update(int $tournament, int $stage, Request $request)
+    public function update(int $tournament, int $stage, UpdateStageRequest $request)
     {
         try {
             $tournament = $this->tournamentsService->find($tournament);
@@ -55,7 +57,7 @@ class StagesController extends Controller
         ]));
     }
 
-    public function connect(int $tournament, Request $request)
+    public function connect(int $tournament, ConnectStageRequest $request)
     {
         try {
             $tournament = $this->tournamentsService->find($tournament);
