@@ -1,6 +1,7 @@
 <?php
 
 namespace Leaguefy\LeaguefyAdmin\Console;
+
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
@@ -11,6 +12,12 @@ class InstallCommand extends Command
 
     public function handle()
     {
-        //
+        $this->call('vendor:publish', [
+            '--provider' => 'Leaguefy\LeaguefyAdmin\LeaguefyAdminServiceProvider',
+        ]);
+
+        $this->call('leaguefy-manager:install');
+
+        $this->call('adminlte:install');
     }
 }

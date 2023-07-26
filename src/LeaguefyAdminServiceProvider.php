@@ -20,7 +20,7 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
     ];
 
     private $commands = [
-        Console\LeaguefyCommand::class,
+        Console\LeaguefyAdminCommand::class,
         Console\InstallCommand::class,
     ];
 

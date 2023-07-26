@@ -1,12 +1,13 @@
 <?php
 
 namespace Leaguefy\LeaguefyAdmin\Console;
+
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Leaguefy\LeaguefyAdmin\LeaguefyAdmin;
 
-class LeaguefyCommand extends Command
+class LeaguefyAdminCommand extends Command
 {
     protected $signature = 'leaguefy-admin';
 
@@ -19,6 +20,7 @@ class LeaguefyCommand extends Command
  / /___/  __/ /_/ / /_/ / /_/ /  __/ __/ /_/ /
 /_____/\___/\__,_/\__, /\__,_/\___/_/  \__, /
                  /____/               /____/
+                                   ::Admin::
 
 LOGO;
 
