@@ -1,11 +1,11 @@
-@php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
-@php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
+@php( $logout_url = View::getSection('logout_url') ?? config('leaguefy-admin.logout_url', 'logout') )
+@php( $profile_url = View::getSection('profile_url') ?? config('leaguefy-admin.profile_url', 'logout') )
 
-@if (config('adminlte.usermenu_profile_url', false))
+@if (config('leaguefy-admin.usermenu_profile_url', false))
     @php( $profile_url = Auth::user()->adminlte_profile_url() )
 @endif
 
-@if (config('adminlte.use_route_url', false))
+@if (config('leaguefy-admin.use_route_url', false))
     @php( $profile_url = $profile_url ? route($profile_url) : '' )
     @php( $logout_url = $logout_url ? route($logout_url) : '' )
 @else
@@ -17,12 +17,12 @@
 
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-        @if(config('adminlte.usermenu_image'))
+        @if(config('leaguefy-admin.usermenu_image'))
             <img src="{{ Auth::user()->adminlte_image() }}"
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
+        <span @if(config('leaguefy-admin.usermenu_image')) class="d-none d-md-inline" @endif>
             {{ Auth::user()->name }}
         </span>
     </a>
@@ -31,17 +31,17 @@
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         {{-- User menu header --}}
-        @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
-            <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
-                @if(!config('adminlte.usermenu_image')) h-auto @endif">
-                @if(config('adminlte.usermenu_image'))
+        @if(!View::hasSection('usermenu_header') && config('leaguefy-admin.usermenu_header'))
+            <li class="user-header {{ config('leaguefy-admin.usermenu_header_class', 'bg-primary') }}
+                @if(!config('leaguefy-admin.usermenu_image')) h-auto @endif">
+                @if(config('leaguefy-admin.usermenu_image'))
                     <img src="{{ Auth::user()->adminlte_image() }}"
                          class="img-circle elevation-2"
                          alt="{{ Auth::user()->name }}">
                 @endif
-                <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
+                <p class="@if(!config('leaguefy-admin.usermenu_image')) mt-0 @endif">
                     {{ Auth::user()->name }}
-                    @if(config('adminlte.usermenu_desc'))
+                    @if(config('leaguefy-admin.usermenu_desc'))
                         <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif
                 </p>
@@ -51,7 +51,7 @@
         @endif
 
         {{-- Configured user menu links --}}
-        @each('adminlte::partials.navbar.dropdown-item', $adminlte->menu("navbar-user"), 'item')
+        @each('leaguefy-admin::partials.navbar.dropdown-item', $adminlte->menu("navbar-user"), 'item')
 
         {{-- User menu body --}}
         @hasSection('usermenu_body')
@@ -65,17 +65,17 @@
             @if($profile_url)
                 <a href="{{ $profile_url }}" class="btn btn-default btn-flat">
                     <i class="fa fa-fw fa-user text-lightblue"></i>
-                    {{ __('adminlte::menu.profile') }}
+                    {{ __('leaguefy-admin::menu.profile') }}
                 </a>
             @endif
             <a class="btn btn-default btn-flat float-right @if(!$profile_url) btn-block @endif"
                href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-fw fa-power-off text-red"></i>
-                {{ __('adminlte::adminlte.log_out') }}
+                {{ __('leaguefy-admin::adminlte.log_out') }}
             </a>
             <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
-                @if(config('adminlte.logout_method'))
-                    {{ method_field(config('adminlte.logout_method')) }}
+                @if(config('leaguefy-admin.logout_method'))
+                    {{ method_field(config('leaguefy-admin.logout_method')) }}
                 @endif
                 {{ csrf_field() }}
             </form>

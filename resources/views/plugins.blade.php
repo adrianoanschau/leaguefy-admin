@@ -1,4 +1,4 @@
-@foreach(config('adminlte.plugins') as $pluginName => $plugin)
+@foreach(config('leaguefy-admin.plugins') as $pluginName => $plugin)
 
     {{-- Check whether the plugin is active --}}
 

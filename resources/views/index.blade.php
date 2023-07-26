@@ -1,1 +1,0 @@
-@extends('leaguefy-admin::page')

@@ -1,14 +1,28 @@
-<nav class="main-header navbar
-    {{ config('adminlte.classes_topnav_nav', 'navbar-expand-md') }}
-    {{ config('adminlte.classes_topnav', 'navbar-white navbar-light') }}">
+@php
+    if (config()->has('leaguefy-admin.topbar.color')) {
+        $classes_topnav_nav = config('leaguefy-admin.classes_topnav_nav');
+        $classes_topnav_nav = explode(' ', $classes_topnav_nav);
+        $classes_topnav_nav = array_map(function ($class) {
+            if (!Str::of($class)->contains('bg-')) return $class;
+            return config('leaguefy-admin.topbar.color');
+        }, $classes_topnav_nav);
+        $classes_topnav_nav = implode(' ', $classes_topnav_nav);
+    } else {
+        $classes_topnav_nav = config('leaguefy-admin.classes_topnav_nav', 'navbar-expand-md');
+    }
+@endphp
 
-    <div class="{{ config('adminlte.classes_topnav_container', 'container') }}">
+<nav class="main-header navbar
+    {{ $classes_topnav_nav }}
+    {{ config('leaguefy-admin.classes_topnav', 'navbar-white navbar-light') }}">
+
+    <div class="{{ config('leaguefy-admin.classes_topnav_container', 'container') }}">
 
         {{-- Navbar brand logo --}}
-        @if(config('adminlte.logo_img_xl'))
-            @include('adminlte::partials.common.brand-logo-xl')
+        @if(config('leaguefy-admin.logo_img_xl'))
+            @include('leaguefy-admin::partials.common.brand-logo-xl')
         @else
-            @include('adminlte::partials.common.brand-logo-xs')
+            @include('leaguefy-admin::partials.common.brand-logo-xs')
         @endif
 
         {{-- Navbar toggler button --}}
@@ -22,7 +36,7 @@
             {{-- Navbar left links --}}
             <ul class="nav navbar-nav">
                 {{-- Configured left links --}}
-                @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-left'), 'item')
+                @each('leaguefy-admin::partials.navbar.menu-item', $adminlte->menu('navbar-left'), 'item')
 
                 {{-- Custom left links --}}
                 @yield('content_top_nav_left')
@@ -35,20 +49,20 @@
             @yield('content_top_nav_right')
 
             {{-- Configured right links --}}
-            @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item')
+            @each('leaguefy-admin::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item')
 
             {{-- User menu link --}}
             @if(Auth::user())
-                @if(config('adminlte.usermenu_enabled'))
-                    @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
+                @if(config('leaguefy-admin.usermenu_enabled'))
+                    @include('leaguefy-admin::partials.navbar.menu-item-dropdown-user-menu')
                 @else
-                    @include('adminlte::partials.navbar.menu-item-logout-link')
+                    @include('leaguefy-admin::partials.navbar.menu-item-logout-link')
                 @endif
             @endif
 
             {{-- Right sidebar toggler link --}}
-            @if(config('adminlte.right_sidebar'))
-                @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
+            @if(config('leaguefy-admin.right_sidebar'))
+                @include('leaguefy-admin::partials.navbar.menu-item-right-sidebar-toggler')
             @endif
         </ul>
 

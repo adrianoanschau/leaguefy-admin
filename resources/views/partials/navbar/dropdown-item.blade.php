@@ -3,11 +3,11 @@
 @if ($navbarItemHelper->isSubmenu($item))
 
     {{-- Dropdown submenu --}}
-    @include('adminlte::partials.navbar.dropdown-item-submenu')
+    @include('leaguefy-admin::partials.navbar.dropdown-item-submenu')
 
 @elseif ($navbarItemHelper->isLink($item))
 
     {{-- Dropdown link --}}
-    @include('adminlte::partials.navbar.dropdown-item-link')
+    @include('leaguefy-admin::partials.navbar.dropdown-item-link')
 
 @endif

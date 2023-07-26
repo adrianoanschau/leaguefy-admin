@@ -4,7 +4,6 @@ namespace Leaguefy\LeaguefyAdmin;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +22,14 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
         Console\LeaguefyAdminCommand::class,
         Console\InstallCommand::class,
     ];
+
+    private LeaguefyAdminConfigProvider $leaguefyAdminConfigProvider;
+
+    public function __construct($app) {
+        parent::__construct($app);
+
+        $this->leaguefyAdminConfigProvider = new LeaguefyAdminConfigProvider($app, $this->prefix);
+    }
 
     public function register()
     {
@@ -43,15 +50,13 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom($this->path(LeaguefyAdmin::$views), $this->prefix);
         $this->loadTranslationsFrom($this->path(LeaguefyAdmin::$translations), $this->prefix);
-        $this->mergeConfigFrom($this->path(LeaguefyAdmin::$config_file), $this->prefix);
 
         Blade::componentNamespace('Leaguefy\\LeaguefyAdmin\\View\\Components', 'leaguefy-admin');
         $this->loadViewComponentsAs('leaguefy-admin', []);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([$this->path(LeaguefyAdmin::$assets) => public_path("vendor/{$this->prefix}")], "{$this->prefix}-assets");
-            // $this->publishes([$this->path(LeaguefyAdmin::$config_path) => config_path()], 'leaguefy-admin');
-            // $this->loadMigrationsFrom(LeaguefyAdmin::migrations);
+            $this->loadMigrationsFrom($this->path(LeaguefyAdmin::$migrations));
         }
 
         $this->app->booted(function () {
@@ -66,32 +71,17 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
             ], $this->path(LeaguefyAdmin::$routes));
         });
 
-        $this->overrideAdminLteConfig();
         $this->registerViewComposers($view);
+        $this->leaguefyAdminConfigProvider->boot();
     }
 
     private function path($path)
     {
         return __DIR__."/../$path";
     }
-    private function overrideAdminLteConfig()
-    {
-        $adminlte = config('adminlte', []);
-        $leaguefyAdmin = config('leaguefy-admin', []);
-
-        collect($adminlte)->map(function ($value, $index) {
-            if (!config("leaguefy-admin.{$index}")) {
-                Config::set("leaguefy-admin.{$index}", config("adminlte.{$index}"));
-            }
-        });
-
-        collect($leaguefyAdmin)->map(function ($value, $index) {
-            Config::set("adminlte.{$index}", config("leaguefy-admin.{$index}", config("adminlte.{$index}")));
-        });
-    }
 
     private function registerViewComposers(Factory $view)
     {
-        $view->composer('leaguefy-admin::page', AdminLteComposer::class);
+        $view->composer("{$this->prefix}::page", AdminLteComposer::class);
     }
 }

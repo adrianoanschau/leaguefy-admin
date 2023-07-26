@@ -3,7 +3,7 @@
 @if ($navbarItemHelper->isSearch($item))
 
     {{-- Search form --}}
-    @include('adminlte::partials.navbar.menu-item-search-form')
+    @include('leaguefy-admin::partials.navbar.menu-item-search-form')
 
 @elseif ($navbarItemHelper->isNotification($item))
 
@@ -23,7 +23,7 @@
 @elseif ($navbarItemHelper->isFullscreen($item))
 
     {{-- Fullscreen toggle widget --}}
-    @include('adminlte::partials.navbar.menu-item-fullscreen-widget')
+    @include('leaguefy-admin::partials.navbar.menu-item-fullscreen-widget')
 
 @elseif ($navbarItemHelper->isDarkmode($item))
 
@@ -38,11 +38,11 @@
 @elseif ($navbarItemHelper->isSubmenu($item))
 
     {{-- Dropdown menu --}}
-    @include('adminlte::partials.navbar.menu-item-dropdown-menu')
+    @include('leaguefy-admin::partials.navbar.menu-item-dropdown-menu')
 
 @elseif ($navbarItemHelper->isLink($item))
 
     {{-- Link --}}
-    @include('adminlte::partials.navbar.menu-item-link')
+    @include('leaguefy-admin::partials.navbar.menu-item-link')
 
 @endif
