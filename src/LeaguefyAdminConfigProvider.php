@@ -36,10 +36,12 @@ class LeaguefyAdminConfigProvider extends ServiceProvider
             Config::set("adminlte.{$index}", config("{$this->prefix}.{$index}", config("adminlte.{$index}")));
         });
 
-        $customPreferences = $this->settingsRepository->all()->pluck('value', 'name');
-        $customPreferences->map(function ($value, $index) {
-            Config::set("{$this->prefix}.".str_replace("-", ".", $index), $value);
-        });
+        if ($this->settingsRepository->exists()) {
+            $customPreferences = $this->settingsRepository->all()->pluck('value', 'name');
+            $customPreferences->map(function ($value, $index) {
+                Config::set("{$this->prefix}.".str_replace("-", ".", $index), $value);
+            });
+        }
     }
 
     private function path($path)
