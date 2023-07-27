@@ -46,8 +46,10 @@
         @endif
 
         {{-- Right sidebar toggler link --}}
-        @if(config('leaguefy-admin.right_sidebar'))
-            @include('leaguefy-admin::partials.navbar.menu-item-right-sidebar-toggler')
+        @if(config('leaguefy-admin.settings.sidebar'))
+            @if(config('leaguefy-admin.right_sidebar'))
+                @include('leaguefy-admin::partials.navbar.menu-item-right-sidebar-toggler')
+            @endif
         @endif
     </ul>
 
