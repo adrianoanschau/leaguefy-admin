@@ -2,10 +2,13 @@
 
 namespace Leaguefy\LeaguefyAdmin\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
+    use HasUuids;
+
     public $hidden = [
         'id',
     ];

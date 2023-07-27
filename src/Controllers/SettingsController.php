@@ -9,7 +9,6 @@ use Leaguefy\LeaguefyAdmin\Requests\SettingsRoutePrefixRequest;
 
 class SettingsController extends Controller
 {
-
     public function __construct(
         private SettingsService $settingsService,
     ) {
