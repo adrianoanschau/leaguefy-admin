@@ -37,10 +37,13 @@ class LeaguefyAdminConfigProvider extends ServiceProvider
         });
 
         if ($this->settingsRepository->exists()) {
+            Config::set('leaguefy-admin.settings.sidebar', true);
             $customPreferences = $this->settingsRepository->all()->pluck('value', 'name');
             $customPreferences->map(function ($value, $index) {
                 Config::set("{$this->prefix}.".str_replace("-", ".", $index), $value);
             });
+        } else {
+            Config::set('leaguefy-admin.settings.sidebar', false);
         }
     }
 

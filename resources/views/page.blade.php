@@ -1,5 +1,7 @@
 @extends('leaguefy-admin::master')
 
-@section('right-sidebar')
-    @include('leaguefy-admin::partials.settings.index')
-@stop
+@if (config('leaguefy-admin.settings.sidebar'))
+    @section('right-sidebar')
+        @include('leaguefy-admin::partials.settings.index')
+    @stop
+@endif
