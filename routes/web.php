@@ -14,7 +14,7 @@ use Leaguefy\LeaguefyAdmin\Controllers;
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('leaguefy-admin::page');
 })->name('index');
 

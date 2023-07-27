@@ -63,10 +63,13 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
             Route::group([
                 'prefix'     => config('leaguefy-admin.route.prefix'),
                 'middleware' => array_merge([
-                    'leaguefy-admin',
-                    'leaguefy-admin.pjax',
-                    'leaguefy-admin.redirects',
-                ], config('leaguefy-admin.route.middleware', [])),
+                        'leaguefy-admin',
+                        'leaguefy-admin.pjax',
+                        'leaguefy-admin.redirects',
+                    ],
+                    config('leaguefy-admin.route.middleware', []),
+                    config('leaguefy-manager.route.middleware', []),
+                ),
                 'as' => 'leaguefy.admin.',
             ], $this->path(LeaguefyAdmin::$routes));
         });
