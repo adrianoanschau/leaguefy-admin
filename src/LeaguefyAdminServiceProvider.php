@@ -2,9 +2,9 @@
 
 namespace Leaguefy\LeaguefyAdmin;
 
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\ServiceProvider;
 
 use JeroenNoten\LaravelAdminLte\Http\ViewComposers\AdminLteComposer;
@@ -23,14 +23,6 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
         Console\InstallCommand::class,
     ];
 
-    private LeaguefyAdminConfigProvider $leaguefyAdminConfigProvider;
-
-    public function __construct($app) {
-        parent::__construct($app);
-
-        $this->leaguefyAdminConfigProvider = new LeaguefyAdminConfigProvider($app, $this->prefix);
-    }
-
     public function register()
     {
         foreach ($this->middlewares as $key => $middleware) {
@@ -44,6 +36,8 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
         });
 
         $this->commands($this->commands);
+
+        $this->app->register(LeaguefyAdminConfigProvider::class);
     }
 
     public function boot(Factory $view)
@@ -75,7 +69,6 @@ class LeaguefyAdminServiceProvider extends ServiceProvider
         });
 
         $this->registerViewComposers($view);
-        $this->leaguefyAdminConfigProvider->boot();
     }
 
     private function path($path)

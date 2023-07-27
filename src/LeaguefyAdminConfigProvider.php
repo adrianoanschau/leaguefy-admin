@@ -8,11 +8,12 @@ use Leaguefy\LeaguefyAdmin\Repositories\SettingsRepository;
 
 class LeaguefyAdminConfigProvider extends ServiceProvider
 {
+    private $prefix = 'leaguefy-admin';
+
     private SettingsRepository $settingsRepository;
 
     public function __construct(
         $app,
-        private $prefix,
     ) {
         parent::__construct($app);
 
