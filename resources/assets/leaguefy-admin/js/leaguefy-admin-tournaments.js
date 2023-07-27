@@ -215,10 +215,12 @@ leaguefy.tournaments = {
             .split(':')
             .map((n) => parseInt(n, 10));
 
+          const laneEl = document.getElementById(`lane-${lane}`);
+
+          if (!laneEl) return;
+
           const totalLaneConnections = Array.from(
-            document
-              .getElementById(`lane-${lane}`)
-              .querySelectorAll('[data-connect-to]'),
+            laneEl.querySelectorAll('[data-connect-to]'),
           ).length;
 
           if (div1 && div2) {
@@ -262,7 +264,6 @@ leaguefy.tournaments = {
       const lane = parseInt(id.replace('lane-', ''), 10);
 
       stageLink.addEventListener('click', (event) => {
-        const parentClasses = event.currentTarget.parentNode.classList;
         const { connectTo } = event.currentTarget.parentNode.dataset;
         let connections;
         if (connectTo) {

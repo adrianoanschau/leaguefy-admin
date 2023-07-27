@@ -425,7 +425,7 @@ leaguefy.pages = {
       let app_title = document.querySelector('#app_title')?.innerText;
       let h1_title = document.querySelector('main h1').innerText;
       if (h1_title) {
-        document.title = `${app_title ?? 'Leaguefy'} | ${h1_title}`;
+        document.title = `${app_title ?? 'Leaguefy'} | ` + h1_title;
       }
     }
   },
@@ -444,7 +444,7 @@ leaguefy.pages = {
       document.querySelectorAll('[data-bs-toggle="tooltip"]'),
     );
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl);
+      // return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
     var inputTooltipTriggerList = [].slice.call(
