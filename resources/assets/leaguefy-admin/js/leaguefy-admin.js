@@ -422,9 +422,10 @@ leaguefy.pages = {
 
   setTitle: function () {
     if (document.querySelector('main h1')) {
+      let app_title = document.querySelector('#app_title')?.innerText;
       let h1_title = document.querySelector('main h1').innerText;
       if (h1_title) {
-        document.title = 'Leaguefy | ' + h1_title;
+        document.title = `${app_title ?? 'Leaguefy'} | ${h1_title}`;
       }
     }
   },

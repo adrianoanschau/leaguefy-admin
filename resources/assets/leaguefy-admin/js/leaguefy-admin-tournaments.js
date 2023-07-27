@@ -30,10 +30,6 @@ leaguefy.tournaments = {
       this.updateStages();
       this.removeStages();
 
-      // $("#editStage").on("show.bs.modal", (event) => {
-      //     console.log(event);
-      // });
-
       config.querySelectorAll('[data-leaguefy-stages]').forEach((el) => {
         el.addEventListener('click', (event) => {
           const eventName = event.currentTarget.dataset.leaguefyStages;
