@@ -17,7 +17,6 @@ class LeaguefyAdminException extends Exception
 
     public function __construct(Throwable $e)
     {
-        dd($e);
         $message = $this->messageMap[$e->getCode()] ?? 'Internal Server Error';
         $code = $this->codeMap[$e->getCode()] ?? 500;
 
