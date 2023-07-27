@@ -2,10 +2,10 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Leaguefy\LeaguefyManager\Requests\StoreTeamRequest;
-use Leaguefy\LeaguefyManager\Requests\UpdateTeamRequest;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TeamsService;
+use Leaguefy\LeaguefyManager\Requests\StoreTeamRequest;
+use Leaguefy\LeaguefyManager\Requests\UpdateTeamRequest;
 
 class TeamsController extends Controller
 {
@@ -54,7 +54,7 @@ class TeamsController extends Controller
         ]));
     }
 
-    public function edit(int $id)
+    public function edit(string $id)
     {
         $data = $this->teamsService->find($id);
 
@@ -72,7 +72,7 @@ class TeamsController extends Controller
         ]);
     }
 
-    public function update(int $id, UpdateTeamRequest $request)
+    public function update(string $id, UpdateTeamRequest $request)
     {
         $this->teamsService->update($id, $request);
 
@@ -82,7 +82,7 @@ class TeamsController extends Controller
         ]));
     }
 
-    public function destroy(int $id)
+    public function destroy(string $id)
     {
         $this->teamsService->destroy($id);
 

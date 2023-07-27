@@ -2,11 +2,11 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Leaguefy\LeaguefyManager\Requests\ConnectStageRequest;
+use Leaguefy\LeaguefyManager\Services\StagesService;
 use Leaguefy\LeaguefyManager\Requests\StoreStageRequest;
 use Leaguefy\LeaguefyManager\Requests\UpdateStageRequest;
-use Leaguefy\LeaguefyManager\Services\StagesService;
 use Leaguefy\LeaguefyManager\Services\TournamentsService;
+use Leaguefy\LeaguefyManager\Requests\ConnectStageRequest;
 
 class StagesController extends Controller
 {
@@ -15,51 +15,51 @@ class StagesController extends Controller
         private TournamentsService $tournamentsService,
     ) {}
 
-    public function index(int $id)
+    public function index(string $tournamentId)
     {
-        $data = $this->tournamentsService->find($id);
+        $data = $this->tournamentsService->find($tournamentId);
 
         return view('leaguefy-admin::tournaments.stages', [
             'tournament' => $data,
         ]);
     }
 
-    public function store(int $tournament, StoreStageRequest $request)
+    public function store(string $tournamentId, StoreStageRequest $request)
     {
-        $tournament = $this->tournamentsService->find($tournament);
+        $tournament = $this->tournamentsService->find($tournamentId);
         $request->merge(['tournament' => $tournament->slug]);
 
         $this->stagesService->store($request);
 
-        return redirect()->back()
+        return redirect()->action([self::class, 'index'], ['tournament' => $tournamentId])
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Nova etapa adicionada!']
             ]));
     }
 
-    public function update(int $tournament, int $stage, UpdateStageRequest $request)
+    public function update(string $tournamentId, string $stage, UpdateStageRequest $request)
     {
-        $tournament = $this->tournamentsService->find($tournament);
+        $tournament = $this->tournamentsService->find($tournamentId);
         $request->merge(['tournament' => $tournament->slug]);
 
         $this->stagesService->update($stage, $request);
 
-        return redirect()->back()
+        return redirect()->action([self::class, 'index'], ['tournament' => $tournamentId])
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Etapa atualizada com sucesso!']
             ]));
     }
 
-    public function connect(int $tournament, ConnectStageRequest $request)
+    public function connect(string $tournamentId, ConnectStageRequest $request)
     {
-        $tournament = $this->tournamentsService->find($tournament);
+        $tournament = $this->tournamentsService->find($tournamentId);
         $request->merge(['tournament' => $tournament->slug]);
 
         $connect = $this->stagesService->connect($request);
 
-        return redirect()->back()
+        return redirect()->action([self::class, 'index'], ['tournament' => $tournamentId])
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => [
@@ -68,13 +68,13 @@ class StagesController extends Controller
             ]));
     }
 
-    public function destroy(int $tournament, int $stage)
+    public function destroy(string $tournamentId, string $stage)
     {
-        $tournament = $this->tournamentsService->find($tournament);
+        $tournament = $this->tournamentsService->find($tournamentId);
 
         $this->stagesService->destroy($tournament->stages->find($stage)->id);
 
-        return redirect()->back()
+        return redirect()->action([self::class, 'index'], ['tournament' => $tournamentId])
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Etapa removida com sucesso!']

@@ -2,10 +2,10 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Leaguefy\LeaguefyAdmin\Requests\SettingsRoutePrefixRequest;
+use Leaguefy\LeaguefyAdmin\Services\SettingsService;
 use Leaguefy\LeaguefyAdmin\Requests\SettingsBrandRequest;
 use Leaguefy\LeaguefyAdmin\Requests\SettingsStylesRequest;
-use Leaguefy\LeaguefyAdmin\Services\SettingsService;
+use Leaguefy\LeaguefyAdmin\Requests\SettingsRoutePrefixRequest;
 
 class SettingsController extends Controller
 {

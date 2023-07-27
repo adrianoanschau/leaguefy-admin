@@ -2,9 +2,9 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
+use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Requests\StoreGameRequest;
 use Leaguefy\LeaguefyManager\Requests\UpdateGameRequest;
-use Leaguefy\LeaguefyManager\Services\GamesService;
 
 class GamesController extends Controller
 {
@@ -42,14 +42,14 @@ class GamesController extends Controller
     {
         $this->gamesService->store($request);
 
-        return redirect()->back()
+        return redirect()->route("leaguefy.admin.games.index")
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Game criado com sucesso!']
             ]));
     }
 
-    public function edit(int $id)
+    public function edit(string $id)
     {
         $data = $this->gamesService->find($id);
 
@@ -62,22 +62,22 @@ class GamesController extends Controller
         ]);
     }
 
-    public function update(int $id, UpdateGameRequest $request)
+    public function update(string $id, UpdateGameRequest $request)
     {
         $this->gamesService->update($id, $request);
 
-        return redirect()->back()
+        return redirect()->route("leaguefy.admin.games.index")
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Game atualizado com sucesso!']
             ]));
     }
 
-    public function destroy(int $id)
+    public function destroy(string $id)
     {
         $this->gamesService->destroy($id);
 
-        return redirect()->back()
+        return redirect()->route("leaguefy.admin.games.index")
             ->with('toastr', collect([
                 'type' => ['success'],
                 'message' => ['Game excluído com sucesso!']

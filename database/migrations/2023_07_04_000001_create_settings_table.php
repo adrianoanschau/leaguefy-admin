@@ -14,7 +14,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create(config('leaguefy-admin.database.tables.settings'), function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->string('value');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('leaguefy-manager.database.tables.settings'));
+        Schema::dropIfExists(config('leaguefy-admin.database.tables.settings'));
     }
 }

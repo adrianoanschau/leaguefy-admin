@@ -2,10 +2,10 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
-use Leaguefy\LeaguefyManager\Requests\StoreTournamentRequest;
-use Leaguefy\LeaguefyManager\Requests\UpdateTournamentRequest;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TournamentsService;
+use Leaguefy\LeaguefyManager\Requests\StoreTournamentRequest;
+use Leaguefy\LeaguefyManager\Requests\UpdateTournamentRequest;
 
 class TournamentsController extends Controller
 {
@@ -64,7 +64,7 @@ class TournamentsController extends Controller
         ]));
     }
 
-    public function edit(int $id)
+    public function edit(string $id)
     {
         $data = $this->tournamentsService->find($id);
 
@@ -82,7 +82,7 @@ class TournamentsController extends Controller
         ]);
     }
 
-    public function update(int $id, UpdateTournamentRequest $request)
+    public function update(string $id, UpdateTournamentRequest $request)
     {
         $this->tournamentsService->update($id, $request);
 
@@ -92,7 +92,7 @@ class TournamentsController extends Controller
         ]));
     }
 
-    public function destroy(int $id)
+    public function destroy(string $id)
     {
         $this->tournamentsService->destroy($id);
 
