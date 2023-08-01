@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Leaguefy',
-    'logo' => '<b>Leaguefy</b>Admin',
+    'logo' => 'Leaguefy Admin',
 
     'route' => [
         'prefix' => 'leaguefy',
@@ -10,10 +10,6 @@ return [
     ],
 
     'menu' => [
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
         [
             'text'        => 'games',
             'route'       => 'leaguefy.admin.games.index',
@@ -46,7 +42,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '/vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__wobble',
             'width' => 60,
@@ -54,9 +50,17 @@ return [
         ],
     ],
 
-    'dashboard_url' => 'leaguefy',
+    'dashboard_route' => 'leaguefy.admin.index',
+    'logout_route' => 'auth.logout',
 
     'right_sidebar' => true,
     'right_sidebar_push' => false,
     'right_sidebar_theme' => 'light',
+
+    'usermenu_enabled' => true,
+    'usermenu_header' => false,
+    'usermenu_header_class' => 'bg-primary',
+    'usermenu_image' => false,
+    'usermenu_desc' => false,
+    'usermenu_profile_url' => false,
 ];

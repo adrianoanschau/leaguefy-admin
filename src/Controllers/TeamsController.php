@@ -2,6 +2,7 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
+use Inertia\Inertia;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TeamsService;
 use Leaguefy\LeaguefyManager\Requests\StoreTeamRequest;
@@ -18,7 +19,7 @@ class TeamsController extends Controller
     {
         $teams = $this->teamsService->list();
 
-        return view('leaguefy-admin::teams.index', [
+        return Inertia::render('Teams/List', [
             'columns' => [
                 [
                     'column' => 'name',
@@ -33,7 +34,7 @@ class TeamsController extends Controller
 
     public function create()
     {
-        return view('leaguefy-admin::teams.form', [
+        return Inertia::render('Teams/Form', [
             'fields' => [
                 'name',
                 [
@@ -48,17 +49,17 @@ class TeamsController extends Controller
     {
         $this->teamsService->store($request);
 
-        return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Time criado com sucesso!']
+        return to_route("leaguefy.admin.teams.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Time criado com sucesso!',
         ]));
     }
 
     public function edit(string $id)
     {
-        $data = $this->teamsService->find($id);
+        $data = $this->teamsService->find($id)->load(['game']);
 
-        return view('leaguefy-admin::teams.form', [
+        return Inertia::render('Teams/Form', [
             'id' => $id,
             'fields' => [
                 'name',
@@ -76,9 +77,9 @@ class TeamsController extends Controller
     {
         $this->teamsService->update($id, $request);
 
-        return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Time atualizado com sucesso!']
+        return to_route("leaguefy.admin.teams.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Time atualizado com sucesso!',
         ]));
     }
 
@@ -86,9 +87,9 @@ class TeamsController extends Controller
     {
         $this->teamsService->destroy($id);
 
-        return redirect()->route("leaguefy.admin.teams.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Time excluído com sucesso!']
+        return to_route("leaguefy.admin.teams.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Time excluído com sucesso!',
         ]));
     }
 

@@ -17,7 +17,9 @@
     "php": ">=7.2.5",
     "laravel/framework": ">=7.0",
     "jeroennoten/laravel-adminlte": ">=3.9.1",
-    "leaguefy/leaguefy-manager": "^0.1.8"
+    "leaguefy/leaguefy-manager": "^0.1.8",
+    "inertiajs/inertia-laravel": "^0.6.3",
+    "tightenco/ziggy": "^1.0"
   },
   "extra": {
     "laravel": {

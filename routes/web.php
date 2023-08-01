@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Leaguefy\LeaguefyAdmin\Controllers;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Leaguefy\LeaguefyAdmin\Controllers;
 */
 
 Route::get('/dashboard', function () {
-    return view('leaguefy-admin::page');
+    return Inertia::render('Dashboard');
 })->name('index');
 
 Route::resource('games', Controllers\GamesController::class);

@@ -2,6 +2,7 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
+use Inertia\Inertia;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Services\TournamentsService;
 use Leaguefy\LeaguefyManager\Requests\StoreTournamentRequest;
@@ -18,7 +19,7 @@ class TournamentsController extends Controller
     {
         $tournaments = $this->tournamentsService->list();
 
-        return view('leaguefy-admin::tournaments.index', [
+        return Inertia::render('Tournaments/List', [
             'columns' => [
                 [
                     'column' => 'name',
@@ -43,7 +44,7 @@ class TournamentsController extends Controller
 
     public function create()
     {
-        return view('leaguefy-admin::tournaments.form', [
+        return Inertia::render('Tournaments/Form', [
             'fields' => [
                 'name',
                 [
@@ -58,17 +59,17 @@ class TournamentsController extends Controller
     {
         $this->tournamentsService->store($request);
 
-        return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Torneio criado com sucesso!']
+        return to_route("leaguefy.admin.tournaments.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Torneio criado com sucesso!',
         ]));
     }
 
     public function edit(string $id)
     {
-        $data = $this->tournamentsService->find($id);
+        $data = $this->tournamentsService->find($id)->load(['game']);
 
-        return view('leaguefy-admin::tournaments.form', [
+        return Inertia::render('Tournaments/Form', [
             'id' => $id,
             'fields' => [
                 'name',
@@ -86,9 +87,9 @@ class TournamentsController extends Controller
     {
         $this->tournamentsService->update($id, $request);
 
-        return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Torneio atualizado com sucesso!']
+        return to_route("leaguefy.admin.tournaments.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Torneio atualizado com sucesso!',
         ]));
     }
 
@@ -96,9 +97,9 @@ class TournamentsController extends Controller
     {
         $this->tournamentsService->destroy($id);
 
-        return redirect()->route("leaguefy.admin.tournaments.index")->with('toastr', collect([
-            'type' => ['success'],
-            'message' => ['Torneio excluído com sucesso!']
+        return to_route("leaguefy.admin.tournaments.index")->with('toastr', collect([
+            'type' => 'success',
+            'message' => 'Torneio excluído com sucesso!',
         ]));
     }
 

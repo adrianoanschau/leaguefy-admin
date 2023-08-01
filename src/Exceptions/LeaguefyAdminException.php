@@ -3,6 +3,7 @@
 namespace Leaguefy\LeaguefyAdmin\Exceptions;
 
 use Exception;
+use Illuminate\Http\Request;
 use Throwable;
 
 class LeaguefyAdminException extends Exception
@@ -21,5 +22,13 @@ class LeaguefyAdminException extends Exception
         $code = $this->codeMap[$e->getCode()] ?? 500;
 
         parent::__construct($message, $code);
+    }
+
+    public function render(Request $request)
+    {
+        return back()->with('error', collect([
+            'title' => 'Erro: ' . $this->getCode(),
+            'message' => $this->getMessage(),
+        ]));
     }
 }

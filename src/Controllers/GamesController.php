@@ -2,6 +2,7 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
+use Inertia\Inertia;
 use Leaguefy\LeaguefyManager\Services\GamesService;
 use Leaguefy\LeaguefyManager\Requests\StoreGameRequest;
 use Leaguefy\LeaguefyManager\Requests\UpdateGameRequest;
@@ -16,7 +17,7 @@ class GamesController extends Controller
     {
         $data = $this->gamesService->list();
 
-        return view('leaguefy-admin::games.index', [
+        return Inertia::render('Games/List', [
             'columns' => [
                 [
                     'column' => 'name',
@@ -31,7 +32,7 @@ class GamesController extends Controller
 
     public function create()
     {
-        return view('leaguefy-admin::games.form', [
+        return Inertia::render('Games/Form', [
             'fields' => [
                 'name',
             ],
@@ -42,10 +43,10 @@ class GamesController extends Controller
     {
         $this->gamesService->store($request);
 
-        return redirect()->route("leaguefy.admin.games.index")
+        return to_route("leaguefy.admin.games.index")
             ->with('toastr', collect([
-                'type' => ['success'],
-                'message' => ['Game criado com sucesso!']
+                'type' => 'success',
+                'message' => 'Game criado com sucesso!',
             ]));
     }
 
@@ -53,7 +54,7 @@ class GamesController extends Controller
     {
         $data = $this->gamesService->find($id);
 
-        return view('leaguefy-admin::games.form', [
+        return Inertia::render('Games/Form', [
             'id' => $id,
             'fields' => [
                 'name',
@@ -66,10 +67,10 @@ class GamesController extends Controller
     {
         $this->gamesService->update($id, $request);
 
-        return redirect()->route("leaguefy.admin.games.index")
+        return to_route("leaguefy.admin.games.index")
             ->with('toastr', collect([
-                'type' => ['success'],
-                'message' => ['Game atualizado com sucesso!']
+                'type' => 'success',
+                'message' => 'Game atualizado com sucesso!',
             ]));
     }
 
@@ -77,10 +78,10 @@ class GamesController extends Controller
     {
         $this->gamesService->destroy($id);
 
-        return redirect()->route("leaguefy.admin.games.index")
+        return to_route("leaguefy.admin.games.index")
             ->with('toastr', collect([
-                'type' => ['success'],
-                'message' => ['Game excluído com sucesso!']
+                'type' => 'success',
+                'message' => 'Game excluído com sucesso!',
             ]));
     }
 
