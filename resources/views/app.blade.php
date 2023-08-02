@@ -51,8 +51,8 @@
     @routes
     @viteReactRefresh
     @vite([
-        'packages/leaguefy/leaguefy-admin/resources/js/app.jsx',
-        "packages/leaguefy/leaguefy-admin/resources/js/Pages/{$page['component']}.jsx"
+        'vendor/leaguefy/leaguefy-admin/resources/js/app.jsx',
+        "vendor/leaguefy/leaguefy-admin/resources/js/Pages/{$page['component']}.jsx"
     ])
     @inertiaHead
 </head>
