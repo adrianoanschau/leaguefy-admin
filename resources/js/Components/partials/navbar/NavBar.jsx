@@ -1,21 +1,12 @@
-import { useCallback } from 'react';
-import { usePage } from '@inertiajs/react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from '@inertiajs/react';
 import { BrandLogo } from '../common';
 import { useAuth, useConfig, useMenu } from '../../../hooks';
 
 export const NavBar = () => {
-  const { props } = usePage();
   const { user } = useAuth();
   const { config } = useConfig();
   const menu = useMenu();
-
-  const handleLogout = useCallback(async () => {
-    const { request } = await axios.post(route(config('logout_route', '#')), {
-      _token: props.csrf_token,
-    });
-    window.location.href = request.responseURL;
-  }, []);
 
   return (
     <Navbar expand="lg" className={`${config('classes_brand', '')}`}>
@@ -31,7 +22,11 @@ export const NavBar = () => {
         </Nav>
         <Nav className="ms-auto">
           <NavDropdown title={user?.name} id="user-menu">
-            <NavDropdown.Item onClick={handleLogout}>
+            <NavDropdown.Item
+              as={Link}
+              href={route(config('logout_route', '#'))}
+              method="post"
+            >
               <i className="fas fa-fw fa-sign-out-alt"></i>
               <span>Sair</span>
             </NavDropdown.Item>

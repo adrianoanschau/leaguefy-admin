@@ -3,11 +3,15 @@ import Master from '../../Layouts/Master';
 import { Form } from '../../Components/Form';
 
 export default function GamesForm() {
-  const { props } = usePage();
+  const {
+    props: { id, data },
+  } = usePage();
 
   return (
     <Master header="Games">
-      <Form name="game" fields={props.fields} id={props.id} data={props.data} />
+      <Master.Content>
+        <Form name="game" fields={[{ column: 'name' }]} id={id} data={data} />
+      </Master.Content>
     </Master>
   );
 }

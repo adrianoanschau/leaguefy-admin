@@ -1,46 +1,59 @@
-import { useConfig } from '../hooks';
-import { Alerts, Preloader, Toastify } from '../Components/partials/common';
+import { Container, ThemeProvider } from 'react-bootstrap';
+import { Alerts, Toastify } from '../Components/partials/common';
 import { LeftSidebar, RightSidebar } from '../Components/partials/sidebar';
 import { NavBar } from '../Components/partials/navbar';
 import { Footer } from '../Components/partials/footer';
+import { Children } from 'react';
 
 export default function Master({ header, children }) {
-  const { config } = useConfig();
-
   return (
-    <>
-      <div className="wrapper">
-        {/* {config('preloader.enabled', false) && <Preloader />} */}
+    <ThemeProvider>
+      <Container className="wrapper p-0" fluid>
         <NavBar />
         <LeftSidebar />
 
-        <main
-          id="main"
-          className={`content-wrapper ${config('classes_content_wrapper', '')}`}
-        >
+        <main id="main" className="content-wrapper">
           {header && (
             <div className="content-header">
-              <div
-                className={config('classes_content_header', 'container-fluid')}
+              <Container
+                className="d-flex justify-content-between align-items-center"
+                fluid
               >
                 <h1>{header}</h1>
-              </div>
+                <div className="d-flex align-items-center">
+                  {Children.toArray(children).filter((child) => {
+                    return child.type === Master.Actions;
+                  })}
+                </div>
+              </Container>
             </div>
           )}
 
           <div className="border-top m-3"></div>
 
           <div className="content">
-            <div className={config('classes_content', 'container-fluid')}>
+            <Container fluid>
               <Alerts />
-              <div id="app">{children}</div>
-            </div>
+              <div id="app">
+                {Children.toArray(children).filter((child) => {
+                  return child.type === Master.Content;
+                })}
+              </div>
+            </Container>
           </div>
         </main>
         <Footer />
         <Toastify />
         <RightSidebar />
-      </div>
-    </>
+      </Container>
+    </ThemeProvider>
   );
 }
+
+Master.Actions = ({ children }) => {
+  return <>{children}</>;
+};
+
+Master.Content = ({ children }) => {
+  return <>{children}</>;
+};

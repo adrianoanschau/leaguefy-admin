@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { Link } from '@inertiajs/react';
+import { Button, Card, ButtonGroup } from 'react-bootstrap';
 import { useFormData } from '../../hooks';
 import { ucFirst } from '../../helpers';
-import { Button, Card } from 'react-bootstrap';
 
 function mapFields(fields) {
   return fields.map(function (field) {
@@ -110,7 +110,7 @@ export const Form = ({ name, fields: originalFields, id, data }) => {
           ))}
         </Card.Body>
         <Card.Footer className="card-footer">
-          <div className="float-right">
+          <ButtonGroup className="float-right">
             <Button type="button" variant="warning" size="sm">
               <i className="fas fa-fw fa-broom"></i>
               Limpar
@@ -124,7 +124,7 @@ export const Form = ({ name, fields: originalFields, id, data }) => {
               <i className="fas fa-fw fa-save"></i>
               {!!id ? 'Salvar' : 'Atualizar'}
             </Button>
-          </div>
+          </ButtonGroup>
         </Card.Footer>
       </form>
     </Card>

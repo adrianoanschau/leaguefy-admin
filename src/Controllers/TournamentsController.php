@@ -20,24 +20,6 @@ class TournamentsController extends Controller
         $tournaments = $this->tournamentsService->list();
 
         return Inertia::render('Tournaments/List', [
-            'columns' => [
-                [
-                    'column' => 'name',
-                    'avatar' => 'logo',
-                    'subtitle' => 'slug',
-                ],
-                'slug',
-                [
-                    'column' => 'status',
-                    'badge' => 'primary',
-                ],
-                [
-                    'label' => 'Stages',
-                    'classes' => 'text-center',
-                    'link_route' => 'stages',
-                    'link_icon' => 'fa-sitemap',
-                ],
-            ],
             'data' => $tournaments,
         ]);
     }
@@ -45,13 +27,7 @@ class TournamentsController extends Controller
     public function create()
     {
         return Inertia::render('Tournaments/Form', [
-            'fields' => [
-                'name',
-                [
-                    'column' => 'game',
-                    'options' => $this->gamesService->list()->pluck('name', 'slug'),
-                ],
-            ],
+            'games' => $this->gamesService->list()->pluck('name', 'slug'),
         ]);
     }
 
@@ -71,14 +47,7 @@ class TournamentsController extends Controller
 
         return Inertia::render('Tournaments/Form', [
             'id' => $id,
-            'fields' => [
-                'name',
-                [
-                    'label' => 'Game',
-                    'column' => 'game.name',
-                    'disabled' => true,
-                ],
-            ],
+            'games' => $this->gamesService->list()->pluck('name', 'slug'),
             'data' => $data,
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace Leaguefy\LeaguefyAdmin\Controllers;
 
+use Inertia\Inertia;
 use Leaguefy\LeaguefyManager\Services\StagesService;
 use Leaguefy\LeaguefyManager\Requests\StoreStageRequest;
 use Leaguefy\LeaguefyManager\Requests\UpdateStageRequest;
@@ -17,10 +18,11 @@ class StagesController extends Controller
 
     public function index(string $tournamentId)
     {
-        $data = $this->tournamentsService->find($tournamentId);
+        $tournament = $this->tournamentsService->find($tournamentId);
 
-        return view('leaguefy-admin::tournaments.stages', [
-            'tournament' => $data,
+        return Inertia::render('Tournaments/StagesFlow', [
+            'tournament' => $tournament,
+            'lanes' => $tournament->stages->load(['parents', 'children'])->sortBy('position')->sortBy('lane')->groupBy('lane')->values(),
         ]);
     }
 

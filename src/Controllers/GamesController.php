@@ -18,25 +18,13 @@ class GamesController extends Controller
         $data = $this->gamesService->list();
 
         return Inertia::render('Games/List', [
-            'columns' => [
-                [
-                    'column' => 'name',
-                    'avatar' => 'logo',
-                    'subtitle' => 'slug',
-                ],
-                'slug'
-            ],
             'data' => $data,
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('Games/Form', [
-            'fields' => [
-                'name',
-            ],
-        ]);
+        return Inertia::render('Games/Form');
     }
 
     public function store(StoreGameRequest $request)
@@ -56,9 +44,6 @@ class GamesController extends Controller
 
         return Inertia::render('Games/Form', [
             'id' => $id,
-            'fields' => [
-                'name',
-            ],
             'data' => $data,
         ]);
     }

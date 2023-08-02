@@ -20,28 +20,15 @@ class TeamsController extends Controller
         $teams = $this->teamsService->list();
 
         return Inertia::render('Teams/List', [
-            'columns' => [
-                [
-                    'column' => 'name',
-                    'avatar' => 'logo',
-                    'subtitle' => 'slug',
-                ],
-                'slug'
-            ],
             'data' => $teams,
+            'games' => $this->gamesService->list()->pluck('name', 'slug'),
         ]);
     }
 
     public function create()
     {
         return Inertia::render('Teams/Form', [
-            'fields' => [
-                'name',
-                [
-                    'column' => 'game',
-                    'options' => $this->gamesService->list()->pluck('name', 'slug'),
-                ],
-            ],
+            'games' => $this->gamesService->list()->pluck('name', 'slug'),
         ]);
     }
 
@@ -61,14 +48,7 @@ class TeamsController extends Controller
 
         return Inertia::render('Teams/Form', [
             'id' => $id,
-            'fields' => [
-                'name',
-                [
-                    'label' => 'Game',
-                    'column' => 'game.name',
-                    'disabled' => true,
-                ]
-            ],
+            'games' => $this->gamesService->list()->pluck('name', 'slug'),
             'data' => $data,
         ]);
     }

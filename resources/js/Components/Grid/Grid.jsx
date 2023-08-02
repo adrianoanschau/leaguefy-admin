@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from 'react';
+import { Children, useCallback, useMemo } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 import { ucFirst } from '../../helpers';
-import { Card, Table } from 'react-bootstrap';
+import { Button, Card, Table } from 'react-bootstrap';
 
 function mapColumns(columns) {
   return columns.map((column) => {
@@ -20,7 +20,7 @@ function mapColumns(columns) {
   });
 }
 
-export const Grid = ({ name, columns: originalColumns, data }) => {
+export const Grid = ({ name, columns: originalColumns, data, form }) => {
   const columns = useMemo(() => {
     return mapColumns(originalColumns);
   }, [originalColumns]);
@@ -100,18 +100,25 @@ export const Grid = ({ name, columns: originalColumns, data }) => {
                 style={{ minWidth: 100 }}
               >
                 <div className="d-flex justify-content-end">
-                  <Link
-                    className="btn btn-sm btn-success border-0"
+                  <Button
+                    variant="success"
+                    size="sm"
+                    as={Link}
                     href={route(`leaguefy.admin.${name}s.create`)}
                   >
                     <i className="fas fa-fw fa-plus"></i>
                     <span className="d-none d-sm-inline">Criar</span>
-                  </Link>
+                  </Button>
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
+            {!!form && (
+              <tr>
+                <td colSpan={columns.length + 1}>{form}</td>
+              </tr>
+            )}
             {!data.length && (
               <tr>
                 <td className="bg-light p-5" colSpan={columns.length + 1}>
@@ -166,4 +173,8 @@ export const Grid = ({ name, columns: originalColumns, data }) => {
       </Card.Body>
     </Card>
   );
+};
+
+Grid.Form = ({ children }) => {
+  return <>{children}</>;
 };
