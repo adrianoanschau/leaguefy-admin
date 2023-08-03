@@ -14,7 +14,12 @@ export default function TournamentsForm() {
           name="tournament"
           fields={[
             { column: 'name' },
-            { column: 'game.slug', label: 'Game', options: games },
+            {
+              column: 'game.slug',
+              name: 'game',
+              label: 'Game',
+              options: games,
+            },
           ]}
           id={id}
           data={data}

@@ -11,6 +11,7 @@ function mapFields(fields) {
     return {
       label: field?.label ?? ucFirst(field?.column),
       column: field?.column,
+      name: field?.name ?? field?.column,
       type: field?.type ?? 'text',
       options: field?.options ?? null,
       disabled: field?.disabled ?? false,
@@ -28,7 +29,6 @@ export const Form = ({ name, fields: originalFields, id, data }) => {
     setData: setFormData,
     submit,
     processing,
-    errors,
   } = useFormData(fields, data);
 
   const handleSubmit = useCallback(
@@ -76,10 +76,10 @@ export const Form = ({ name, fields: originalFields, id, data }) => {
                 {!!field?.options && (
                   <select
                     id={field.column}
-                    name={field.column}
+                    name={field.name}
                     className="form-control"
                     disabled={field.disabled}
-                    onChange={(e) => setFormData(field.column, e.target.value)}
+                    onChange={(e) => setFormData(field.name, e.target.value)}
                   >
                     <option value=""></option>
                     {Object.entries(field.options).map(([index, option]) => (
@@ -97,12 +97,12 @@ export const Form = ({ name, fields: originalFields, id, data }) => {
                   <input
                     type={field.type}
                     id={field.column}
-                    name={field.column}
+                    name={field.name}
                     className="form-control"
                     placeholder={field.label}
                     value={formData[field.column]}
                     disabled={field.disabled}
-                    onChange={(e) => setFormData(field.column, e.target.value)}
+                    onChange={(e) => setFormData(field.name, e.target.value)}
                   />
                 )}
               </div>
