@@ -4,7 +4,7 @@ namespace Leaguefy\LeaguefyAdmin;
 
 class LeaguefyAdmin
 {
-    public const VERSION = '0.1.22';
+    public const VERSION = '0.1.23';
 
     public static $config_path = 'config';
 
