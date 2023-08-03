@@ -22,7 +22,7 @@ class StagesController extends Controller
 
         return Inertia::render('Tournaments/StagesFlow', [
             'tournament' => $tournament,
-            'lanes' => $tournament->stages->load(['parents', 'children'])->sortBy('position')->sortBy('lane')->groupBy('lane')->values(),
+            'lanes' => $tournament->stages->load(['parents', 'children'])->sortBy('position')->sortBy('lane')->groupBy('lane'),
         ]);
     }
 
